@@ -26,7 +26,7 @@ const store = (req,res) => {
         const fixImage = path.join(__dirname, '../../uploads', image.originalname)
         fs.renameSync(image.path, fixImage)
         
-        Product.create({name, price, stock, status, image_url:`http://localhost:${port}/public/${image.originalname}`})
+        Product.create({name, price, stock, status, image_url:`https://express-mongo-api-backend.herokuapp.com/public/${image.originalname}`})
         .then(result => res.send(result))
         .catch(error => res.send(error))
         
@@ -47,12 +47,12 @@ const update = (req, res) => {
         const fixImage = path.join(__dirname, '../../uploads', image.originalname)
         fs.renameSync(image.path, fixImage)
 
-        Product.updateOne({id},{name,price,stock,status, image_url:`http//localhost:${port}/public/${image.originalname}`})
+        Product.findByIdAndUpdate({id},{name,price,stock,status, image_url:`http//localhost:${port}/public/${image.originalname}`})
         .then(result => res.send(result))
         .catch(error => res.send(error))
     } else {
         
-        Product.updateOne({id},{name,price,stock,status})
+        Product.findByIdAndUpdate({id},{name,price,stock,status})
         .then(result => res.send(result))
         .catch(error => res.send(error))
     }

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const database = process.env.MONGO_URI || 'mongodb://eduwork:eduwork@localhost:27017/eduwork-mongoose?authSource=admin'
+const database = process.env.MONGO_URI
 mongoose.connect(database, {
     useNewUrlParser: true,
     useUnifiedTopology: true
