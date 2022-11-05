@@ -13,7 +13,7 @@ const index = (req,res) => {
 
 const view = (req,res) => {
     const {id} = req.params
-    Product.findById(id)
+    Product.findById({_id: ObjectId(id)})
     .then(result => res.send(result))
     .catch(error => res.send(error))
 }
@@ -47,12 +47,12 @@ const update = (req, res) => {
         const fixImage = path.join(__dirname, '../../uploads', image.originalname)
         fs.renameSync(image.path, fixImage)
 
-        Product.findByIdAndUpdate({id},{name,price,stock,status, image_url:`http//localhost:${port}/public/${image.originalname}`})
+        Product.findByIdAndUpdate({_id: ObjectId(id)},{name,price,stock,status, image_url:`http//localhost:${port}/public/${image.originalname}`})
         .then(result => res.send(result))
         .catch(error => res.send(error))
     } else {
         
-        Product.findByIdAndUpdate({id},{name,price,stock,status})
+        Product.findByIdAndUpdate({_id: ObjectId(id)},{name,price,stock,status})
         .then(result => res.send(result))
         .catch(error => res.send(error))
     }
